@@ -72,9 +72,9 @@ function DataChatReply(message) {
     chatShows.scrollTop = chatShows.scrollHeight
 
   sendToBackend(message).then(reply => {
-    // Loading message ko replace karo
-    loadingMessage.innerText = reply;
-    chatShows.scrollTop = chatShows.scrollHeight;
+  
+    loadingMessage.innerText = reply
+    chatShows.scrollTop = chatShows.scrollHeight
 })
 }
 
@@ -106,5 +106,6 @@ const inputBox = document.querySelector(".chatingZone");
 if (autoPrompt && inputBox) {  
     inputBox.value = autoPrompt;
 }
+
 
 
