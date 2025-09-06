@@ -71,14 +71,11 @@ function DataChatReply(message) {
     chatShows.appendChild(loadingMessage)
     chatShows.scrollTop = chatShows.scrollHeight
 
-    sendToBackend(message).then(reply => {
-        const DataChatMessage = document.createElement("div")
-        DataChatMessage.classList.add("message", "dataChat")
-        DataChatMessage.innerText = reply
-        chatShows.appendChild(DataChatMessage)
-
-        chatShows.scrollTop = chatShows.scrollHeight
-    })
+  sendToBackend(message).then(reply => {
+    // Loading message ko replace karo
+    loadingMessage.innerText = reply;
+    chatShows.scrollTop = chatShows.scrollHeight;
+})
 }
 
 //sidebar
@@ -109,4 +106,5 @@ const inputBox = document.querySelector(".chatingZone");
 if (autoPrompt && inputBox) {  
     inputBox.value = autoPrompt;
 }
+
 
