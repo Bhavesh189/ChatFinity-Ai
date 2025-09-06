@@ -64,15 +64,21 @@ function DataChatReply(message) {
             return "Sorry, something went wrong!";
         }
     }
+// loading animation
+    const loadingMessage = document.createElement("div")
+    loadingMessage.classList.add("message", "dataChat")
+    loadingMessage.innerText = "Loading...
+    chatShows.appendChild(loadingMessage)
+    chatShows.scrollTop = chatShows.scrollHeight
 
     sendToBackend(message).then(reply => {
-        const DataChatMessage = document.createElement("div");
-        DataChatMessage.classList.add("message", "dataChat");
-        DataChatMessage.innerText = reply;
-        chatShows.appendChild(DataChatMessage);
+        const DataChatMessage = document.createElement("div")
+        DataChatMessage.classList.add("message", "dataChat")
+        DataChatMessage.innerText = reply
+        chatShows.appendChild(DataChatMessage)
 
-        chatShows.scrollTop = chatShows.scrollHeight;
-    });
+        chatShows.scrollTop = chatShows.scrollHeight
+    })
 }
 
 //sidebar
@@ -94,3 +100,12 @@ const logoutOptions = document.querySelector(".logout")
 logoutBar.addEventListener("click", () => {
     logoutOptions.classList.toggle("active")
 });
+// portfolio website connect
+const urlPrompt = new URLSearchParams(window.location.search);
+const autoPrompt = urlPrompt.get("prompt");
+
+const inputBox = document.querySelector(".chatingZone");
+
+if (autoPrompt && inputBox) {  
+    inputBox.value = autoPrompt;
+}
