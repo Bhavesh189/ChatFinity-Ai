@@ -67,7 +67,7 @@ function DataChatReply(message) {
 // loading animation
     const loadingMessage = document.createElement("div")
     loadingMessage.classList.add("message", "dataChat")
-    loadingMessage.innerText = "Loading...
+    loadingMessage.innerText = "Loading..."
     chatShows.appendChild(loadingMessage)
     chatShows.scrollTop = chatShows.scrollHeight
 
@@ -109,3 +109,4 @@ const inputBox = document.querySelector(".chatingZone");
 if (autoPrompt && inputBox) {  
     inputBox.value = autoPrompt;
 }
+
