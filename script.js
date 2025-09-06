@@ -18,22 +18,22 @@ listener.onresult = (event) => {
 // sending message
 const chatShows = document.getElementById("chats")
 const sendbtn = document.getElementById("sendbtn")
-const fileInput = document.getElementById("fileUplod");
+const fileInput = document.getElementById("fileUplod")
 
 sendbtn.addEventListener("click", () => {
-    const userMessage = chatingZone.value.trim();
-    if (userMessage === "") return;
+    const userMessage = chatingZone.value.trim()
+    if (userMessage === "") return
 
-    const userMessageNew = document.createElement("div");
-    userMessageNew.classList.add("message", "user");
-    userMessageNew.innerText = userMessage;
-    chatShows.appendChild(userMessageNew);
+    const userMessageNew = document.createElement("div")
+    userMessageNew.classList.add("message", "user")
+    userMessageNew.innerText = userMessage
+    chatShows.appendChild(userMessageNew)
     DataChatReply(userMessage)
-    chatShows.style.justifyContent = "flex-start";
-    chatingZone.value = "";
-    fileInput.value = "";
+    chatShows.style.justifyContent = "flex-start"
+    chatingZone.value = ""
+    fileInput.value = ""
 
-    chatShows.scrollTop = chatShows.scrollHeight;
+    chatShows.scrollTop = chatShows.scrollHeight
 });
 chatingZone.addEventListener("keydown", (e) => {
     if (e.key == "Enter") {
@@ -61,13 +61,13 @@ function DataChatReply(message) {
             return data.reply;
         } catch (err) {
             console.error("Fetch error:", err);
-            return "Sorry, something went wrong!";
+            return "Please Wait , Check your Connection And send massage again";
         }
     }
 // loading animation
     const loadingMessage = document.createElement("div")
     loadingMessage.classList.add("message", "dataChat")
-    loadingMessage.innerText = "Loading..."
+    loadingMessage.innerText = "Please Wait I Am Thinking..."
     chatShows.appendChild(loadingMessage)
     chatShows.scrollTop = chatShows.scrollHeight
 
@@ -106,6 +106,7 @@ const inputBox = document.querySelector(".chatingZone");
 if (autoPrompt && inputBox) {  
     inputBox.value = autoPrompt;
 }
+
 
 
 
