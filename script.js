@@ -41,44 +41,46 @@ chatingZone.addEventListener("keydown", (e) => {
     }
 })
 
-// reply
-function DataChatReply(message) {
-    async function sendToBackend(message) {
-        try {
-            const res = await fetch("https://datachatbackend.onrender.com/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: message })
-            });
-
-
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-
-            const data = await res.json();
-            console.log("Backend reply:", data);
-            return data.reply;
-        } catch (err) {
-            console.error("Fetch error:", err);
-            return "Sorry, something went wrong!";
+// ai reply
+async function DataChatReply(message) {
+ {
+        const eReply = {
+            "tell me about bhavesh education": "Bhavesh Sharma is curruntly pursuing BTech in Computer Science Engineering at Lakshmi devi institute of technology and Engeneering Alwar rajsthan . He want to be a best frontend Devloper and web pentester . And also this AiChatbot is also made by Bhavesh Sharma . If you want to know about me please check my portfolio website where i attached my skills projects and many more My gmail:-   Bhaveshyt.infinity@gmail.com",
+            "who is bhavesh sharma ": "Founder of ChatFinity Ai is Bhavesh Sharma , Here is Bhavesh portfolio website: github.io/bhavesh189/portfolio"
+        }
+        const userMsgLower = message.toLowerCase()
+        const loadingMessage = document.createElement("div");
+        loadingMessage.classList.add("message", "dataChat");
+        loadingMessage.innerText = "Please Wait I Am Thinking...";
+        chatShows.appendChild(loadingMessage);
+        chatShows.scrollTop = chatShows.scrollHeight;
+        if (eReply[userMsgLower]) {
+            setTimeout(() => {
+                loadingMessage.innerText = eReply[userMsgLower]
+                chatShows.scrollTop = chatShows.scrollHeight
+            }, 500)
+            return;
         }
     }
-    // loading animation
-    const loadingMessage = document.createElement("div")
-    loadingMessage.classList.add("message", "dataChat")
-    loadingMessage.innerText = "Loading.."
-    chatShows.appendChild(loadingMessage)
-    chatShows.scrollTop = chatShows.scrollHeight
+    try {
+        const res = await fetch("https://datachatbackend.onrender.com/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: message })
+        });
 
-    sendToBackend(message).then(reply => {
-        const DataChatMessage = document.createElement("div")
-        DataChatMessage.classList.add("message", "dataChat")
-        DataChatMessage.innerText = reply
-        chatShows.appendChild(DataChatMessage)
 
-        chatShows.scrollTop = chatShows.scrollHeight
-    })
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        console.log("Backend reply:", data);
+        return data.reply;
+    } catch (err) {
+        console.error("Fetch error:", err);
+        return "Sorry, something went wrong!";
+    }
 }
 
 //sidebar
