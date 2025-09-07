@@ -42,21 +42,6 @@
         font-size:5vw;
         height:6vw;
     }
-    .message.dataChat {
-    background-color: white;
-    border-radius: 5px;
-    width: fit-content;
-    font-size: 23px;
-    color: black;
-    display: flex;
-    align-self: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    max-width: 25%;
-    word-wrap: break-word;
-    font-family: poppins , sans-serif;
-    margin: 20px;
-}
 }
 .navbar {
     background-color: black;
@@ -280,6 +265,7 @@ body {
     text-align: right;
     max-width: 50%;
     word-wrap: break-word;
+    overflow-wrap: break-word;
     font-family: poppins , sans-serif;
     margin: 20px;
 }
@@ -290,12 +276,13 @@ body {
     width: fit-content;
     font-size: 23px;
     color: black;
-    display: flex;
+    display: inline;
     align-self: flex-start;
     justify-content: flex-start;
     text-align: left;
     max-width: 50%;
     word-wrap: break-word;
+    overflow-wrap: break-word;
     font-family: poppins , sans-serif;
     margin: 20px;
 }
@@ -343,5 +330,4 @@ h3 {
 
 .logout.active p {
     display: block;
-
 }
