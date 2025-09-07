@@ -18,22 +18,22 @@ listener.onresult = (event) => {
 // sending message
 const chatShows = document.getElementById("chats")
 const sendbtn = document.getElementById("sendbtn")
-const fileInput = document.getElementById("fileUplod")
+const fileInput = document.getElementById("fileUplod");
 
 sendbtn.addEventListener("click", () => {
-    const userMessage = chatingZone.value.trim()
-    if (userMessage === "") return
+    const userMessage = chatingZone.value.trim();
+    if (userMessage === "") return;
 
-    const userMessageNew = document.createElement("div")
-    userMessageNew.classList.add("message", "user")
-    userMessageNew.innerText = userMessage
-    chatShows.appendChild(userMessageNew)
+    const userMessageNew = document.createElement("div");
+    userMessageNew.classList.add("message", "user");
+    userMessageNew.innerText = userMessage;
+    chatShows.appendChild(userMessageNew);
     DataChatReply(userMessage)
-    chatShows.style.justifyContent = "flex-start"
-    chatingZone.value = ""
-    fileInput.value = ""
+    chatShows.style.justifyContent = "flex-start";
+    chatingZone.value = "";
+    fileInput.value = "";
 
-    chatShows.scrollTop = chatShows.scrollHeight
+    chatShows.scrollTop = chatShows.scrollHeight;
 });
 chatingZone.addEventListener("keydown", (e) => {
     if (e.key == "Enter") {
@@ -61,21 +61,24 @@ function DataChatReply(message) {
             return data.reply;
         } catch (err) {
             console.error("Fetch error:", err);
-            return "Please Wait , Check your Connection And send massage again";
+            return "Sorry, something went wrong!";
         }
     }
-// loading animation
+    // loading animation
     const loadingMessage = document.createElement("div")
     loadingMessage.classList.add("message", "dataChat")
-    loadingMessage.innerText = "Please Wait I Am Thinking..."
+    loadingMessage.innerText = "Loading.."
     chatShows.appendChild(loadingMessage)
     chatShows.scrollTop = chatShows.scrollHeight
 
-  sendToBackend(message).then(reply => {
-  
-    loadingMessage.innerText = reply
-    chatShows.scrollTop = chatShows.scrollHeight
-})
+    sendToBackend(message).then(reply => {
+        const DataChatMessage = document.createElement("div")
+        DataChatMessage.classList.add("message", "dataChat")
+        DataChatMessage.innerText = reply
+        chatShows.appendChild(DataChatMessage)
+
+        chatShows.scrollTop = chatShows.scrollHeight
+    })
 }
 
 //sidebar
@@ -97,16 +100,15 @@ const logoutOptions = document.querySelector(".logout")
 logoutBar.addEventListener("click", () => {
     logoutOptions.classList.toggle("active")
 });
-// portfolio website connect
-const urlPrompt = new URLSearchParams(window.location.search);
-const autoPrompt = urlPrompt.get("prompt");
+// adding portfolio website
+window.addEventListener("DOMContentLoaded", () => {
+    const inputBox = document.getElementById("chatingZone")
 
-const inputBox = document.querySelector(".chatingZone");
+    const params = new URLSearchParams(window.location.search)
+    const autoPrompt = params.get("prompt")
 
-if (autoPrompt && inputBox) {  
-    inputBox.value = autoPrompt;
-}
-
-
-
-
+    if (autoPrompt) {
+        inputBox.value = decodeURIComponent(autoPrompt)
+        sendbtn.click()
+    }
+});
