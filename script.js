@@ -73,7 +73,7 @@ async function DataChatReply(message) {
 
   // 🔗 BACKEND API CALL (replace with your deployed backend URL)
   try {
-    const res = await fetch("https://back-843v.onrender.com/", {
+    const res = await fetch("https://back-843v.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: message })
@@ -130,5 +130,6 @@ window.addEventListener("DOMContentLoaded", () => {
     sendbtn.click();
   }
 });
+
 
 
